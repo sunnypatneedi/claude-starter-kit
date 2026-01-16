@@ -1,0 +1,51 @@
+{
+  "name": "filesystem",
+  "description": "Extended filesystem access with directory permissions",
+  "server": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@anthropic/mcp-server-filesystem",
+      "--allowed-directories",
+      "${ALLOWED_DIRECTORIES}"
+    ]
+  },
+  "capabilities": [
+    "Read files from allowed directories",
+    "Write files to allowed directories",
+    "List directory contents",
+    "Search for files by pattern",
+    "Get file metadata"
+  ],
+  "setup": {
+    "steps": [
+      "Determine which directories Claude should access",
+      "Set ALLOWED_DIRECTORIES as comma-separated paths",
+      "Example: /Users/you/projects,/Users/you/documents",
+      "Add this configuration to Claude settings"
+    ],
+    "required_env": ["ALLOWED_DIRECTORIES"],
+    "optional_env": []
+  },
+  "usage_examples": [
+    "List all TypeScript files in my projects folder",
+    "Read the contents of config.json",
+    "Find all files containing 'TODO'",
+    "Check when a file was last modified"
+  ],
+  "security_notes": [
+    "Only grant access to necessary directories",
+    "Avoid granting access to sensitive directories",
+    "Never allow access to system directories",
+    "Review allowed directories periodically"
+  ],
+  "recommended_directories": {
+    "safe": [
+      "Project source directories",
+      "Documentation folders",
+      "Config directories (read-only)"
+    ],
+    "careful": ["Home directory", "Downloads folder", "Desktop"],
+    "never": ["/etc", "/var", "~/.ssh", "~/.aws", "System directories"]
+  }
+}

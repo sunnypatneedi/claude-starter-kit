@@ -1,0 +1,42 @@
+{
+  "name": "slack",
+  "description": "Slack integration for team communication",
+  "server": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-server-slack"],
+    "env": {
+      "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+      "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+    }
+  },
+  "capabilities": [
+    "Read channel messages",
+    "Post messages to channels",
+    "Search message history",
+    "List channels and users",
+    "Reply in threads"
+  ],
+  "setup": {
+    "steps": [
+      "Create a Slack App at https://api.slack.com/apps",
+      "Add Bot Token Scopes: channels:history, channels:read, chat:write, users:read",
+      "Install app to workspace",
+      "Copy Bot User OAuth Token",
+      "Set SLACK_BOT_TOKEN environment variable",
+      "Add this configuration to Claude settings"
+    ],
+    "required_env": ["SLACK_BOT_TOKEN"],
+    "optional_env": ["SLACK_TEAM_ID", "SLACK_DEFAULT_CHANNEL"]
+  },
+  "usage_examples": [
+    "Post a status update to #engineering",
+    "Search for discussions about the API redesign",
+    "Summarize recent messages in #product",
+    "Reply to the thread about deployment"
+  ],
+  "security_notes": [
+    "Only grant access to necessary channels",
+    "Review bot permissions regularly",
+    "Be careful with sensitive channel content"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "claude-starter-kit",
+  "version": "1.0.0",
+  "description": "Comprehensive Claude Code configuration with 30+ agents, 25+ skills, and 10+ hooks organized by Personal, Business, and Engineering domains",
+  "author": "Community",
+  "license": "MIT",
+  "repository": "https://github.com/your-username/claude-starter-kit",
+  "keywords": [
+    "claude-code",
+    "agents",
+    "skills",
+    "hooks",
+    "mcp",
+    "productivity",
+    "engineering",
+    "business"
+  ],
+  "categories": {
+    "personal": "Productivity, learning, writing, journaling, habits",
+    "business": "Sales, marketing, content creation, hiring, pricing, strategy",
+    "engineering": "Architecture, debugging, security, performance, testing, DevOps"
+  }
+}

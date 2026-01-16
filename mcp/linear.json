@@ -1,0 +1,34 @@
+{
+  "name": "linear",
+  "description": "Linear integration for project and issue management",
+  "server": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-server-linear"],
+    "env": {
+      "LINEAR_API_KEY": "${LINEAR_API_KEY}"
+    }
+  },
+  "capabilities": [
+    "List and search issues",
+    "Create and update issues",
+    "Manage issue status and assignees",
+    "Access project and team data",
+    "Track cycles and milestones"
+  ],
+  "setup": {
+    "steps": [
+      "Go to Linear Settings > API > Personal API keys",
+      "Create a new API key",
+      "Set LINEAR_API_KEY environment variable",
+      "Add this configuration to Claude settings"
+    ],
+    "required_env": ["LINEAR_API_KEY"],
+    "optional_env": ["LINEAR_TEAM_ID"]
+  },
+  "usage_examples": [
+    "Show my assigned issues",
+    "Create a bug report for the authentication issue",
+    "Move issue LIN-123 to In Progress",
+    "List issues in the current sprint"
+  ]
+}

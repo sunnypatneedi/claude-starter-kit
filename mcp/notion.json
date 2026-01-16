@@ -1,0 +1,41 @@
+{
+  "name": "notion",
+  "description": "Notion integration for documentation and knowledge base",
+  "server": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-server-notion"],
+    "env": {
+      "NOTION_API_KEY": "${NOTION_API_KEY}"
+    }
+  },
+  "capabilities": [
+    "Read pages and databases",
+    "Create and update pages",
+    "Search content",
+    "Query databases with filters",
+    "Append blocks to pages"
+  ],
+  "setup": {
+    "steps": [
+      "Go to https://www.notion.so/my-integrations",
+      "Create a new integration",
+      "Copy the Internal Integration Token",
+      "Share specific pages/databases with the integration",
+      "Set NOTION_API_KEY environment variable",
+      "Add this configuration to Claude settings"
+    ],
+    "required_env": ["NOTION_API_KEY"],
+    "optional_env": ["NOTION_ROOT_PAGE_ID"]
+  },
+  "usage_examples": [
+    "Search for documentation about the API",
+    "Create a new meeting notes page",
+    "List all items in the project tracker database",
+    "Update the status of a task"
+  ],
+  "security_notes": [
+    "Only share necessary pages with the integration",
+    "Review integration access regularly",
+    "Be aware of what content Claude can access"
+  ]
+}

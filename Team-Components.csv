@@ -1,0 +1,64 @@
+Category,Type,Name,Description,Tools,Status
+Personal,Agent,productivity-coach,Expert in GTD and time management strategies,"Read, Grep, Glob",Active
+Personal,Agent,learning-coach,Expert in study techniques and skill acquisition,"Read, Grep, Glob",Active
+Personal,Agent,writing-coach,Expert in clear writing and editing,"Read, Grep, Glob",Active
+Personal,Agent,reflection-guide,Expert in journaling prompts and life reviews,"Read, Grep, Glob",Active
+Personal,Agent,habit-architect,Expert in habit formation and behavior design,"Read, Grep, Glob",Active
+Business,Agent,ugc-creator,Expert in short-form video content creation,"Read, Grep, Glob, WebSearch",Active
+Business,Agent,performance-marketer,Expert in paid advertising and funnel optimization,"Read, Grep, Glob, WebSearch",Active
+Business,Agent,social-operator,Expert in social media account operations,"Read, Grep, Glob",Active
+Business,Agent,copywriter,Expert in storytelling and segment messaging,"Read, Grep, Glob",Active
+Business,Agent,sales-strategist,Expert in sales playbooks and objection handling,"Read, Grep, Glob",Active
+Business,Agent,pricing-strategist,Expert in pricing models and monetization,"Read, Grep, Glob",Active
+Business,Agent,hiring-expert,Expert in job descriptions and interviews,"Read, Grep, Glob",Active
+Business,Agent,content-strategist,Expert in content calendars and distribution,"Read, Grep, Glob",Active
+Business,Agent,competitive-analyst,Expert in competitive landscape analysis,"Read, Grep, Glob, WebSearch, WebFetch",Active
+Business,Agent,pitch-coach,Expert in investor pitches and storytelling,"Read, Grep, Glob",Active
+Business,Agent,growth-strategist,Expert in growth loops and acquisition,"Read, Grep, Glob",Active
+Business,Agent,product-strategist,Expert in product vision and roadmapping,"Read, Grep, Glob",Active
+Engineering,Agent,systems-orchestrator,Meta-orchestrator for systems thinking workflow,"Read, Grep, Glob",Active
+Engineering,Agent,code-architect,Expert in software architecture and design patterns,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,database-architect,Expert in database design and query optimization,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,debugging-expert,Expert in systematic debugging methodology,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,security-reviewer,Expert in security code review and OWASP,"Read, Grep, Glob",Active
+Engineering,Agent,performance-optimizer,Expert in frontend/backend performance,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,testing-strategist,Expert in testing strategies and TDD/BDD,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,devops-engineer,Expert in CI/CD and infrastructure as code,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,code-reviewer,Expert in code review best practices,"Read, Grep, Glob",Active
+Engineering,Agent,api-designer,Expert in REST API and GraphQL design,"Read, Grep, Glob",Active
+Engineering,Agent,frontend-architect,Expert in frontend architecture and state,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,backend-architect,Expert in backend architecture and services,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,resiliency-expert,Expert in fault tolerance and circuit breakers,"Read, Bash, Grep, Glob",Active
+Engineering,Agent,observability-expert,Expert in logging metrics and tracing,"Read, Bash, Grep, Glob",Active
+Personal,Skill,daily-review,Guide a daily reflection and planning session,-,Active
+Personal,Skill,weekly-review,Guide a weekly review session,-,Active
+Personal,Skill,goal-setting,Help define clear actionable goals,-,Active
+Personal,Skill,learning-plan,Create structured learning plans,-,Active
+Personal,Skill,habit-design,Design habits using behavior science,-,Active
+Business,Skill,pitch-deck-review,Review and improve pitch decks,-,Active
+Business,Skill,pricing-analysis,Analyze and recommend pricing strategy,-,Active
+Business,Skill,job-description,Create compelling job descriptions,-,Active
+Business,Skill,content-calendar,Create monthly content calendars,-,Active
+Business,Skill,competitive-research,Conduct competitive analysis,-,Active
+Business,Skill,multi-agent-orchestrator,Marketing multi-agent orchestration for campaigns and lead gen,-,Active
+Engineering,Skill,code-review,Perform thorough code reviews,-,Active
+Engineering,Skill,debug-help,Help debug issues systematically,-,Active
+Engineering,Skill,api-design,Design RESTful API endpoints,-,Active
+Engineering,Skill,database-schema,Design database schemas,-,Active
+Engineering,Skill,systems-decompose,Decompose features before implementation,-,Active
+Engineering,Skill,systems-review,Review for second-order effects,-,Active
+Engineering,Skill,pr-checklist,Generate PR checklists,-,Active
+Security,Hook,secret-scanner,Scan for potential secrets before committing,PreToolUse,Active
+Security,Hook,sensitive-files,Protect sensitive files from modification,PreToolUse,Active
+Quality,Hook,commit-format,Validate commit message format,PreToolUse,Active
+Quality,Hook,lint-reminder,Remind to run linting after changes,PostToolUse,Active
+Quality,Hook,todo-check,Track TODO comments in code,PostToolUse,Active
+Validation,Hook,build-check,Remind to run build check before completing,Stop,Active
+Validation,Hook,test-reminder,Remind to add tests for new code,PostToolUse,Active
+Validation,Hook,dependency-check,Check for new dependencies,PostToolUse,Active
+MCP,Config,github,GitHub integration for repos and PRs,-,Active
+MCP,Config,linear,Linear integration for project management,-,Active
+MCP,Config,slack,Slack integration for team communication,-,Active
+MCP,Config,postgres,PostgreSQL database access,-,Active
+MCP,Config,notion,Notion integration for documentation,-,Active
+MCP,Config,filesystem,Extended filesystem access,-,Active

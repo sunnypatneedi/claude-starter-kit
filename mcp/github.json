@@ -1,0 +1,34 @@
+{
+  "name": "github",
+  "description": "GitHub integration for repository management, issues, and PRs",
+  "server": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-server-github"],
+    "env": {
+      "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+    }
+  },
+  "capabilities": [
+    "List and search repositories",
+    "Create, read, update issues",
+    "Create and review pull requests",
+    "Read file contents from repos",
+    "Search code across repositories"
+  ],
+  "setup": {
+    "steps": [
+      "Create a GitHub Personal Access Token at https://github.com/settings/tokens",
+      "Grant permissions: repo, read:org, read:user",
+      "Set GITHUB_TOKEN environment variable",
+      "Add this configuration to Claude settings"
+    ],
+    "required_env": ["GITHUB_TOKEN"],
+    "optional_env": ["GITHUB_OWNER", "GITHUB_REPO"]
+  },
+  "usage_examples": [
+    "List open issues in my repository",
+    "Create a PR for the current branch",
+    "Search for TODOs across the codebase",
+    "Check CI status for a PR"
+  ]
+}

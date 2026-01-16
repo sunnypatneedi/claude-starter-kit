@@ -1,0 +1,45 @@
+{
+  "name": "postgres",
+  "description": "PostgreSQL database access for queries and management",
+  "server": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-server-postgres"],
+    "env": {
+      "DATABASE_URL": "${DATABASE_URL}"
+    }
+  },
+  "capabilities": [
+    "Execute SQL queries",
+    "Describe table schemas",
+    "List tables and views",
+    "Explain query plans",
+    "View database statistics"
+  ],
+  "setup": {
+    "steps": [
+      "Ensure PostgreSQL database is accessible",
+      "Create a read-only user (recommended for safety)",
+      "Set DATABASE_URL: postgres://user:pass@host:5432/database",
+      "Add this configuration to Claude settings"
+    ],
+    "required_env": ["DATABASE_URL"],
+    "optional_env": ["DB_SCHEMA", "DB_READ_ONLY"]
+  },
+  "usage_examples": [
+    "Show me the schema for the users table",
+    "Find all orders from the last 7 days",
+    "Explain the query plan for this slow query",
+    "List all tables in the database"
+  ],
+  "security_notes": [
+    "Use a read-only database user when possible",
+    "Never connect to production with write access",
+    "Limit access to specific schemas/tables",
+    "Review queries before execution"
+  ],
+  "recommended_permissions": {
+    "safe": ["SELECT", "USAGE on schemas"],
+    "careful": ["INSERT", "UPDATE (specific tables only)"],
+    "dangerous": ["DELETE", "DROP", "ALTER"]
+  }
+}
