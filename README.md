@@ -1,305 +1,135 @@
 # Claude Starter Kit
 
-A comprehensive, modular Claude Code configuration for individuals and teams. Includes **30+ agents**, **25+ skills**, and **10+ hooks** organized by domain.
+**Your AI assistant team, ready to go.**
 
-## Quick Start
+Get 30+ ready-to-use helpers for productivity, business, and coding in Claude Code. Just install and start asking for help.
 
-### Option 1: Use as Template (Recommended)
+## 60-Second Setup
 
-Click **"Use this template"** on GitHub to create your own repo with this configuration.
+1. Click **"Use this template"** button above
+2. Clone your new repo and open it in Claude Code
+3. Start asking Claude for help!
 
-### Option 2: Add to Existing Project
+Claude automatically uses the helpers in this kit.
 
-```bash
-# Clone and copy to your project
-git clone https://github.com/your-username/claude-starter-kit.git /tmp/claude-kit
-cp -r /tmp/claude-kit/.claude your-project/
-cp /tmp/claude-kit/.mcp.json your-project/
-cp /tmp/claude-kit/CLAUDE.md your-project/
-```
+---
 
-### Option 3: Install Script
+## What Can You Do?
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/your-username/claude-starter-kit/main/install.sh | bash
-```
+Just talk naturally. Ask Claude to help with anything:
 
-## What's Included
+| You say... | Claude helps you... |
+|------------|---------------------|
+| "Help me plan my week" | Create a structured weekly plan with priorities |
+| "I need to write better" | Coach you on clarity, structure, and style |
+| "Review my code" | Run a thorough code review checklist |
+| "Help me prep for an interview" | Practice questions and improve your answers |
+| "Create a pitch deck" | Structure investor-ready slides |
+| "Debug this error" | Systematically find and fix the problem |
+| "Plan my content calendar" | Strategize and schedule your content |
 
-### Agents by Domain
+**No commands to memorize.** Just describe what you need.
 
-| Domain          | Agents    | Purpose                                                |
-| --------------- | --------- | ------------------------------------------------------ |
-| **Personal**    | 5 agents  | Productivity, learning, writing, journaling, habits    |
-| **Business**    | 12 agents | Sales, marketing, content, hiring, pricing, strategy   |
-| **Engineering** | 14 agents | Architecture, debugging, security, performance, DevOps |
+---
 
-### Skills by Domain
+## What's Inside
 
-| Domain          | Skills    | Purpose                                            |
-| --------------- | --------- | -------------------------------------------------- |
-| **Personal**    | 5 skills  | Daily planning, weekly review, goal setting        |
-| **Business**    | 10 skills | Pitch deck, competitive analysis, content calendar |
-| **Engineering** | 12 skills | Code review, PR documentation, security audit      |
+Think of these as different "hats" Claude can wear:
 
-### Hooks
+| Category | Helpers | Examples |
+|----------|---------|----------|
+| **Personal** | 5 | Productivity coach, writing coach, learning coach, habit architect |
+| **Business** | 12 | Sales strategist, pitch coach, content strategist, hiring expert |
+| **Engineering** | 14 | Code reviewer, debugger, security reviewer, API designer |
 
-| Category       | Hooks   | Purpose                                              |
-| -------------- | ------- | ---------------------------------------------------- |
-| **Security**   | 4 hooks | Block secrets, scan vulnerabilities, validate inputs |
-| **Quality**    | 3 hooks | Format code, lint, type-check                        |
-| **Validation** | 3 hooks | Pre-commit checks, branch protection                 |
+Claude picks the right helper based on your question.
 
-### MCP Servers
+---
 
-Pre-configured integrations for:
+## Quick Commands (Optional)
 
-- **GitHub** - Issues, PRs, code search
-- **Linear/Jira** - Project management
-- **Slack** - Team communication
-- **PostgreSQL** - Database access
-- **Notion** - Documentation
-
-## Directory Structure
+You can also use shortcuts:
 
 ```
-claude-starter-kit/
-├── .claude-plugin/
-│   └── plugin.json           # Plugin metadata
-├── .claude/
-│   ├── settings.json         # Hooks & environment config
-│   └── settings.local.json   # Personal overrides (gitignored)
-├── agents/
-│   ├── personal/             # Productivity, learning, writing
-│   ├── business/             # Sales, marketing, content, hiring
-│   └── engineering/          # Architecture, debugging, security
-├── skills/
-│   ├── personal/             # GTD, reflection, habits
-│   ├── business/             # Pitch, analysis, content
-│   └── engineering/          # Review, docs, testing
-├── commands/                  # Slash commands
-├── hooks/
-│   ├── security/             # Secret scanning, vulnerability checks
-│   ├── quality/              # Formatting, linting
-│   └── validation/           # Pre-commit, branch checks
-├── .mcp.json                  # MCP server configurations
-├── CLAUDE.md                  # Project instructions template
-├── Team-Components.csv        # Component tracking spreadsheet
-└── install.sh                 # Installation script
+/daily-plan      → Plan your day
+/weekly-review   → Reflect and plan ahead
+/code-review     → Review code changes
+/pitch-deck      → Create presentation structure
 ```
 
-## Configuration
+But you don't need to memorize these. Just ask naturally.
 
-### Enabling Components
+---
 
-Edit `.claude/settings.json` to enable/disable components:
+## Customize for Your Project
 
-```json
-{
-  "enableAllProjectMcpServers": true,
-  "hooks": {
-    "PreToolUse": [...],
-    "PostToolUse": [...]
-  }
-}
+Edit `CLAUDE.md` to add project-specific instructions:
+
+```markdown
+# My Project
+
+**Stack**: React + Node.js
+**Test command**: npm test
+**Important**: Always use TypeScript
 ```
 
-### Personal Overrides
+Claude will follow these instructions in every conversation.
 
-Create `.claude/settings.local.json` (gitignored) for personal preferences:
+---
 
-```json
-{
-  "env": {
-    "GITHUB_TOKEN": "your-token"
-  }
-}
-```
+<details>
+<summary><strong>Advanced: Add your own helpers</strong></summary>
 
-## Systems Thinking Workflow
+### Create a custom agent
 
-This kit includes a **mandatory systems thinking workflow**:
-
-```
-1. DECOMPOSE → Map causal links, define interfaces, enumerate errors
-2. INVOKE EXPERTS → Run 2-4 domain agents in parallel
-3. IMPLEMENT → Follow contracts, handle all error states
-4. REVIEW → Check performance, security, downstream effects
-```
-
-Use `/systems-decompose` before starting features and `/systems-review` after completing them.
-
-## Agent Categories
-
-### Personal (5 agents)
-
-- `productivity-coach` - GTD, time management, focus strategies
-- `learning-coach` - Study techniques, skill acquisition, spaced repetition
-- `writing-coach` - Clear writing, editing, style improvement
-- `reflection-guide` - Journaling prompts, self-review, growth tracking
-- `habit-architect` - Habit formation, behavior design, streak tracking
-
-### Business (12 agents)
-
-- `sales-strategist` - Sales playbooks, objection handling, pipeline management
-- `pricing-strategist` - Pricing models, value metrics, packaging strategies
-- `hiring-expert` - Job descriptions, interview guides, candidate evaluation
-- `content-strategist` - Content calendars, topic ideation, distribution
-- `ugc-creator` - Short-form video, hooks, trends, platform-native content
-- `performance-marketer` - Paid campaigns, funnel metrics, A/B testing
-- `social-operator` - Account management, posting calendars, engagement
-- `copywriter` - Storytelling, scripts, captions, segment-specific messaging
-- `competitive-analyst` - Market research, feature matrices, positioning
-- `pitch-coach` - Investor decks, storytelling, objection handling
-- `growth-strategist` - Acquisition channels, retention, viral loops
-- `product-strategist` - Roadmaps, prioritization, trade-offs
-
-### Engineering (14 agents)
-
-- `systems-orchestrator` - Decomposition, interface design, second-order review
-- `code-architect` - Architecture decisions, patterns, organization
-- `database-architect` - Schema design, query optimization, migrations
-- `debugging-expert` - Root cause analysis, systematic debugging
-- `security-reviewer` - OWASP, vulnerability scanning, threat modeling
-- `performance-optimizer` - Profiling, bottlenecks, optimization strategies
-- `testing-strategist` - Test strategies, coverage, TDD/BDD approaches
-- `devops-engineer` - CI/CD, infrastructure, deployment strategies
-- `code-reviewer` - Code quality, best practices, maintainability
-- `api-designer` - REST/GraphQL design, versioning, documentation
-- `frontend-architect` - Component design, state management, performance
-- `backend-architect` - Service design, scalability, resilience patterns
-- `resiliency-expert` - Circuit breakers, retries, graceful degradation
-- `observability-expert` - Logging, metrics, tracing, alerting
-
-## Skill Categories
-
-### Personal Skills
-
-- `/daily-plan` - Create structured daily plan
-- `/weekly-review` - Reflect on week, plan next
-- `/goal-setting` - Define SMART goals with milestones
-- `/learning-plan` - Create study plan for new skill
-- `/habit-tracker` - Review and optimize habits
-
-### Business Skills
-
-- `/pitch-deck` - Generate investor pitch structure
-- `/competitive-matrix` - Create feature comparison
-- `/content-calendar` - Plan content for week/month
-- `/video-script` - Write short-form video script
-- `/job-posting` - Create job description
-- `/pricing-analysis` - Analyze pricing strategy
-- `/sales-playbook` - Create sales process document
-- `/campaign-brief` - Define marketing campaign
-- `/ugc-brief` - Brief for user-generated content
-- `/social-audit` - Audit social media presence
-
-### Engineering Skills
-
-- `/systems-decompose` - Decompose feature before implementation
-- `/systems-review` - Second-order effect review after implementation
-- `/code-review` - Structured code review checklist
-- `/pr-docs` - Generate PR documentation with diagrams
-- `/security-audit` - Security vulnerability checklist
-- `/performance-audit` - Performance optimization checklist
-- `/test-plan` - Create comprehensive test plan
-- `/api-design` - Design API endpoint specification
-- `/migration-plan` - Plan database migration
-- `/incident-review` - Post-incident analysis template
-- `/architecture-decision` - Document architecture decision (ADR)
-- `/deployment-checklist` - Pre-deployment verification
-
-## Hooks
-
-### Security Hooks
-
-- `block-secrets.sh` - Prevent committing secrets/tokens
-- `scan-vulnerabilities.sh` - Check for known CVEs
-- `validate-inputs.sh` - Verify input sanitization
-
-### Quality Hooks
-
-- `format-code.sh` - Auto-format on save
-- `lint-check.sh` - Run linter after edits
-- `type-check.sh` - TypeScript validation
-
-### Validation Hooks
-
-- `pre-commit.sh` - Run checks before commit
-- `branch-protection.sh` - Prevent direct main commits
-- `test-runner.sh` - Run tests after changes
-
-## MCP Integrations
-
-### Included Configurations
-
-```json
-{
-  "github": "Issues, PRs, code search",
-  "linear": "Project management",
-  "slack": "Team communication",
-  "postgres": "Database access",
-  "notion": "Documentation"
-}
-```
-
-### Adding Your Own
-
-Edit `.mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "your-service": {
-      "command": "npx",
-      "args": ["-y", "@your-org/mcp-server"],
-      "env": { "API_KEY": "${YOUR_API_KEY}" }
-    }
-  }
-}
-```
-
-## Customization
-
-### Adding New Agents
-
-Create `agents/{category}/your-agent.md`:
+Add a file to `agents/your-category/`:
 
 ```markdown
 ---
-name: your-agent
-description: What this agent does and when to use it
-tools: Read, Grep, Glob
+name: my-helper
+description: What this helper does
 ---
 
-[Agent instructions...]
+You are an expert at...
+[Instructions for Claude]
 ```
 
-### Adding New Skills
+### Connect external tools (MCP)
 
-Create `skills/{category}/your-skill/SKILL.md`:
+Edit the MCP config to connect GitHub, Slack, databases, etc. See the `mcp/` folder for templates.
 
-```markdown
----
-name: your-skill
-description: Trigger-rich description for when Claude should use this
----
+</details>
 
-[Skill instructions...]
+<details>
+<summary><strong>Technical details</strong></summary>
+
+### How it works
+
+- **Agents** = Instruction sets for specific domains
+- **Skills** = Step-by-step workflows (`/command` syntax)
+- **Hooks** = Automatic checks before/after actions
+
+### Structure
+
+```
+agents/       → Domain expertise (personal, business, engineering)
+skills/       → Task workflows
+hooks/        → Automated checks (security, quality)
+mcp/          → External tool configs
+CLAUDE.md     → Your project instructions
 ```
 
-## License
+</details>
 
-MIT License - Use freely, modify as needed, share with others.
+---
 
-## Contributing
+## Learn More
 
-1. Fork this repository
-2. Add your agents/skills/hooks
-3. Submit a pull request
-
-## Support
-
-- [Claude Code Documentation](https://docs.anthropic.com/claude-code)
-- [Agent Skills Format](https://github.com/anthropics/skills)
+- **[Getting Started Guide](GETTING-STARTED.md)** - Step-by-step setup for beginners
+- [Claude Code Docs](https://docs.anthropic.com/claude-code)
 - [MCP Protocol](https://modelcontextprotocol.io)
+- Questions? [Open an issue](../../issues)
+
+---
+
+**License**: MIT. Use it, change it, share it.
