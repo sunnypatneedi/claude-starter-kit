@@ -1,0 +1,40 @@
+{
+  "name": "@sunnypatneedi/claude-starter-kit",
+  "version": "1.0.0",
+  "description": "Comprehensive Claude Code configuration with 30+ agents, 25+ skills, and 10+ hooks organized by Personal, Business, and Engineering domains",
+  "author": "Sunny Patneedi",
+  "license": "CC-BY-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunnypatneedi/claude-starter-kit.git"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "agents",
+    "skills",
+    "hooks",
+    "mcp",
+    "productivity",
+    "engineering",
+    "business",
+    "ai",
+    "automation"
+  ],
+  "bugs": {
+    "url": "https://github.com/sunnypatneedi/claude-starter-kit/issues"
+  },
+  "homepage": "https://github.com/sunnypatneedi/claude-starter-kit#readme",
+  "files": [
+    "agents/",
+    "skills/",
+    "hooks/",
+    "mcp/",
+    ".claude/",
+    ".claude-plugin/",
+    "CLAUDE.md",
+    "README.md",
+    "LICENSE",
+    "install.sh"
+  ]
+}

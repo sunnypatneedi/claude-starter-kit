@@ -1,0 +1,14 @@
+{
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PreToolUse": [],
+    "PostToolUse": [],
+    "UserPromptSubmit": []
+  },
+  "env": {
+    "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+    "LINEAR_API_KEY": "${LINEAR_API_KEY}",
+    "SLACK_TOKEN": "${SLACK_TOKEN}",
+    "NOTION_TOKEN": "${NOTION_TOKEN}"
+  }
+}

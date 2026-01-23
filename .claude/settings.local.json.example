@@ -1,0 +1,18 @@
+{
+  "env": {
+    "GITHUB_TOKEN": "ghp_your_github_token_here",
+    "LINEAR_API_KEY": "lin_api_your_linear_key_here",
+    "SLACK_TOKEN": "xoxb-your-slack-token-here",
+    "NOTION_TOKEN": "secret_your_notion_token_here"
+  },
+  "hooks": {
+    "PreToolUse": [
+      "hooks/security/block-secrets.md",
+      "hooks/validation/pre-commit.md"
+    ],
+    "PostToolUse": [
+      "hooks/quality/format-code.md",
+      "hooks/quality/lint-check.md"
+    ]
+  }
+}
