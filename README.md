@@ -2,6 +2,10 @@
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![GitHub stars](https://img.shields.io/github/stars/sunnypatneedi/claude-starter-kit?style=social)](https://github.com/sunnypatneedi/claude-starter-kit)
+<img width="2080" height="1326" alt="ClaudeStarterKit" src="https://github.com/user-attachments/assets/a33ca8e7-ed0e-424b-b685-f627b98cf62b" />
+<video src="https://github.com/user-attachments/assets/705371ef-7442-49e7-b27d-35b0e939aa8b" controls="controls" style="max-width: 730px;">
+</video>
+
 
 **Your AI assistant team, ready to go.**
 
