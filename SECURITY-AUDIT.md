@@ -8,13 +8,61 @@
 
 ## Executive Summary
 
-The claude-starter-kit is a collection of markdown-based prompt templates (skills, agents, hooks) and JSON configuration files for Claude Code. Overall, the repository contains **no critical security vulnerabilities** such as prompt injection attacks, data exfiltration attempts, or malicious code. The skills and agents are standard instructional markdown files without executable code or hidden directives.
+The claude-starter-kit is a collection of markdown-based prompt templates (skills, agents, hooks) and JSON configuration files for Claude Code. The skills and agents are standard instructional markdown files with no evidence of prompt injection, data exfiltration, or malicious content.
 
-However, there are several **medium and low severity issues** related to configuration defaults, shell script hygiene, and missing safeguards that should be addressed.
+However, the shell hook scripts contain **2 high severity issues** (bash arithmetic injection allowing arbitrary code execution) along with several medium and low severity issues related to configuration defaults and shell scripting hygiene.
 
 ---
 
 ## Findings
+
+### HIGH Severity
+
+#### H1. Arbitrary code execution via bash arithmetic injection in learning hooks
+
+**Files**:
+- `hooks/learning/skill-retrospective.sh:43-46`
+- `hooks/learning/ask-skill-feedback.sh:22-25`
+
+**Code** (identical pattern in both files):
+```bash
+LAST_RETRO=$(cat "$LAST_RETRO_FILE")       # reads from .claude/feedback/.last-retrospective
+NOW=$(date +%s)
+if [ $((NOW - LAST_RETRO)) -lt 86400 ]; then   # VULNERABLE
+```
+
+**Risk**: The content of the timestamp file (`.claude/feedback/.last-retrospective` or `.claude/feedback/.last-feedback-request`) is read directly into a bash arithmetic expression `$((...))` without validation. In bash, arithmetic expansion evaluates array subscript expressions, meaning a crafted file value like `a[$(malicious_command)]` would execute `malicious_command` during the arithmetic evaluation.
+
+Since these files are in the project directory without restricted permissions, any process or user with write access to `.claude/feedback/` can achieve **arbitrary code execution** as the user running the hook.
+
+**Recommendation**: Validate that the file contents are purely numeric before using in arithmetic:
+```bash
+LAST_RETRO=$(cat "$LAST_RETRO_FILE")
+if ! [[ "$LAST_RETRO" =~ ^[0-9]+$ ]]; then
+    LAST_RETRO=0
+fi
+```
+
+---
+
+#### H2. Unsanitized `SESSION_ID` used in file path construction
+
+**File**: `hooks/devops/read-commitlog-on-start.sh:14`
+
+```bash
+SESSION_FILE="/tmp/.claude-session-${SESSION_ID:-default}"
+```
+
+**Risk**: `SESSION_ID` comes from the environment and is never validated. If an attacker controls the environment (e.g., via a malicious `.env` file or inherited shell), they can set `SESSION_ID` to a value containing path traversal (`../../etc/important-file`), causing `touch` (line 20) and the existence check (line 18) to operate on arbitrary file paths. When `SESSION_ID` is unset, it falls back to the fully predictable `/tmp/.claude-session-default`, enabling symlink attacks on shared systems.
+
+**Recommendation**: Sanitize `SESSION_ID` to alphanumerics only and use `$HOME/.claude/sessions/` instead of `/tmp/`:
+```bash
+SAFE_ID=$(echo "${SESSION_ID:-default}" | tr -cd 'a-zA-Z0-9_-')
+SESSION_FILE="$HOME/.claude/sessions/.claude-session-${SAFE_ID}"
+mkdir -p "$HOME/.claude/sessions"
+```
+
+---
 
 ### MEDIUM Severity
 
@@ -107,7 +155,17 @@ However, there are several **medium and low severity issues** related to configu
 
 ---
 
-#### 9. Shell scripts use `find -delete` in /tmp without scope constraints
+#### 9. Hook scripts missing `set -euo pipefail` hardening
+
+**Files**: `hooks/learning/skill-retrospective.sh`, `hooks/learning/ask-skill-feedback.sh`
+
+**Risk**: Unlike `install.sh` and `verify-install.sh` which use `set -e`, the learning hook scripts have no shell hardening flags. Without `set -u`, unset variables silently expand to empty strings (e.g., `$((NOW - ))` if `LAST_RETRO` is empty could cause unexpected behavior). Without `set -e`, errors are silently ignored.
+
+**Recommendation**: Add `set -euo pipefail` to all hook scripts.
+
+---
+
+#### 10. Shell scripts use `find -delete` in /tmp without scope constraints
 
 **File**: `hooks/devops/read-commitlog-on-start.sh:58`
 
@@ -159,22 +217,27 @@ The `multi-agent-orchestrator` skill (`skills/business/multi-agent-orchestrator/
 
 | # | Severity | Finding | File(s) |
 |---|----------|---------|---------|
+| H1 | HIGH | Bash arithmetic injection → arbitrary code execution | `hooks/learning/skill-retrospective.sh:46`, `hooks/learning/ask-skill-feedback.sh:25` |
+| H2 | HIGH | Unsanitized SESSION_ID in file path (path traversal) | `hooks/devops/read-commitlog-on-start.sh:14` |
 | 1 | MEDIUM | `enableAllProjectMcpServers` defaults to true | `.claude/settings.json` |
-| 2 | MEDIUM | Predictable temp file paths | `hooks/devops/read-commitlog-on-start.sh` |
+| 2 | MEDIUM | Predictable temp file paths + TOCTOU race | `hooks/devops/read-commitlog-on-start.sh` |
 | 3 | MEDIUM | Hardcoded path + force push in utility script | `create-fresh-history-now.sh` |
 | 4 | MEDIUM | Feedback directory not gitignored | `.gitignore` |
 | 5 | MEDIUM | Token variable name mismatches | `.claude/settings.json`, `mcp/*.json` |
 | 6 | LOW | Auto-install via `npx -y` | `mcp/*.json` |
 | 7 | LOW | Unused stdin read in hook | `hooks/devops/read-commitlog-on-start.sh` |
 | 8 | LOW | Token format hints in example | `.claude/settings.local.json.example` |
-| 9 | LOW | Unscoped /tmp cleanup | `hooks/devops/read-commitlog-on-start.sh` |
+| 9 | LOW | Missing `set -euo pipefail` in hook scripts | `hooks/learning/*.sh` |
+| 10 | LOW | Unscoped /tmp cleanup | `hooks/devops/read-commitlog-on-start.sh` |
 
-**Critical issues**: 0
+**High issues**: 2
 **Medium issues**: 5
-**Low issues**: 4
+**Low issues**: 5
 
 ---
 
 ## Conclusion
 
-The repository is **fundamentally sound from a security perspective**. The skills, agents, and hooks are benign instructional content with no evidence of prompt injection, data exfiltration, or malicious behavior. The identified issues are configuration hygiene and shell scripting best practices that should be straightforward to address.
+The skills (41 files), agents (29 files), and markdown hooks are **clean** — no prompt injection, data exfiltration, or malicious content was found. The security hooks (`sensitive-files.md`, `secret-scanner.md`) and multi-agent orchestrator safety controls are well-designed.
+
+However, the **shell-based learning hooks have 2 high severity code execution vulnerabilities** (bash arithmetic injection via attacker-writable timestamp files) that should be fixed immediately. The remaining medium issues (default MCP auto-enable, hardcoded force-push script, missing `.gitignore` entries, token name mismatches) are configuration hygiene items that should be addressed promptly.
