@@ -2,8 +2,8 @@
   "env": {
     "GITHUB_TOKEN": "ghp_your_github_token_here",
     "LINEAR_API_KEY": "lin_api_your_linear_key_here",
-    "SLACK_TOKEN": "xoxb-your-slack-token-here",
-    "NOTION_TOKEN": "secret_your_notion_token_here"
+    "SLACK_BOT_TOKEN": "xoxb-your-slack-token-here",
+    "NOTION_API_KEY": "secret_your_notion_token_here"
   },
   "hooks": {
     "PreToolUse": [

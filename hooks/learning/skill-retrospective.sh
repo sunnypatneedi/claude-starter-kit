@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 # .claude/hooks/learning/skill-retrospective.sh
 # Stop hook: Capture feedback when skills/agents are used to improve them over time
 #
@@ -41,6 +42,10 @@ fi
 LAST_RETRO_FILE=".claude/feedback/.last-retrospective"
 if [ -f "$LAST_RETRO_FILE" ]; then
     LAST_RETRO=$(cat "$LAST_RETRO_FILE")
+    # Validate timestamp is purely numeric to prevent arithmetic injection
+    if ! [[ "$LAST_RETRO" =~ ^[0-9]+$ ]]; then
+        LAST_RETRO=0
+    fi
     NOW=$(date +%s)
     # Only ask once per day maximum
     if [ $((NOW - LAST_RETRO)) -lt 86400 ]; then

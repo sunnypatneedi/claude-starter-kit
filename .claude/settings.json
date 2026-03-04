@@ -1,5 +1,5 @@
 {
-  "enableAllProjectMcpServers": true,
+  "enableAllProjectMcpServers": false,
   "hooks": {
     "PreToolUse": [],
     "PostToolUse": [],
@@ -8,7 +8,7 @@
   "env": {
     "GITHUB_TOKEN": "${GITHUB_TOKEN}",
     "LINEAR_API_KEY": "${LINEAR_API_KEY}",
-    "SLACK_TOKEN": "${SLACK_TOKEN}",
-    "NOTION_TOKEN": "${NOTION_TOKEN}"
+    "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+    "NOTION_API_KEY": "${NOTION_API_KEY}"
   }
 }

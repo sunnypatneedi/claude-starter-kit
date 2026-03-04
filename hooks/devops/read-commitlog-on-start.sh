@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 # .claude/hooks/general/read-commitlog-on-start.sh
 # UserPromptSubmit hook: Read COMMITLOG.md context on session start
 #
@@ -8,10 +9,12 @@
 # Exit codes:
 #   0 = success (always, non-blocking)
 
-INPUT=$(cat)
-
 # Only run on first few prompts of session (check session age)
-SESSION_FILE="/tmp/.claude-session-${SESSION_ID:-default}"
+# Sanitize SESSION_ID to alphanumerics, hyphens, and underscores only
+SAFE_SESSION_ID=$(printf '%s' "${SESSION_ID:-default}" | tr -cd 'a-zA-Z0-9_-')
+SESSION_DIR="${HOME}/.claude/sessions"
+mkdir -p "$SESSION_DIR"
+SESSION_FILE="${SESSION_DIR}/.claude-session-${SAFE_SESSION_ID}"
 COMMITLOG_FILE="COMMITLOG.md"
 
 # If session file doesn't exist, this is a new session
@@ -55,6 +58,6 @@ if [ ! -f "$SESSION_FILE" ]; then
 fi
 
 # Clean up old session files (older than 1 day)
-find /tmp -name ".claude-session-*" -mtime +1 -delete 2>/dev/null
+find "$SESSION_DIR" -name ".claude-session-*" -mtime +1 -delete 2>/dev/null || true
 
 exit 0

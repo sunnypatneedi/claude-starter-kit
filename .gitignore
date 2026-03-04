@@ -28,6 +28,9 @@ yarn-error.log*
 *.tmp
 .temp/
 
+# Claude feedback (may contain sensitive session context)
+.claude/feedback/
+
 # Internal planning documents (not for public repo)
 *_GAP_ANALYSIS.md
 *_AUDIT_SUMMARY.md

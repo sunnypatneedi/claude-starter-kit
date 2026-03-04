@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 # .claude/hooks/learning/ask-skill-feedback.sh
 # Stop hook: Triggers Claude to ask for skill feedback when appropriate
 #
@@ -20,6 +21,10 @@ mkdir -p .claude/feedback
 LAST_FEEDBACK_FILE=".claude/feedback/.last-feedback-request"
 if [ -f "$LAST_FEEDBACK_FILE" ]; then
     LAST_FEEDBACK=$(cat "$LAST_FEEDBACK_FILE")
+    # Validate timestamp is purely numeric to prevent arithmetic injection
+    if ! [[ "$LAST_FEEDBACK" =~ ^[0-9]+$ ]]; then
+        LAST_FEEDBACK=0
+    fi
     NOW=$(date +%s)
     # Only ask once per day maximum
     if [ $((NOW - LAST_FEEDBACK)) -lt 86400 ]; then

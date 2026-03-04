@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 # .claude/hooks/general/remind-commitlog-on-stop.sh
 # Stop hook: Remind to update COMMITLOG.md if significant work was done
 #
